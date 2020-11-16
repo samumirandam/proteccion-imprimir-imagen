@@ -9,21 +9,88 @@
     <meta name="robots" content="index,follow" />
     <title>Imprimir Imagenes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="./css/estilos.css" />
   </head>
 
   <body>
-    <main>
-      <section>
-        <h1>Titulo del proyecto</h1>
-        <p>Descripcion de lo que se hace</p>
-      </section>
-      <section>Se agrega un formulario para subir la imagen</section>
+    <main class="container">
+      <div class="row card-panel">
+        <div class="col s12">
+          <section class="section">
+            <h3 class="center-align">Imprimir imágenes tamaño en A4</h3>
+            <ul class="row">
+              <li class="col s12 l6">
+                La imagen puede tener cualquier tamaño o dimensión
+              </li>
+              <li class="col s12 l6">La imagen debe de ser formato .jpg</li>
+              <li class="col s12 l6">
+                La impresión se realizará en una hoja A4 (796 x 1123 pixeles)
+              </li>
+            </ul>
+          </section>
+          <div class="divider"></div>
+        </div>
 
-      <section>Se agregar una parte en la que va ir la respuesta</section>
-      <section>
-        Se agrega una parte para mostrar como va a quedar la imagen en la hoja
-      </section>
+        <div class="col s12 m12 l6">
+          <section class="section">
+            <span><b>Por favor seleccione la imagen que desea imprimir</b></span>
+            <form action="#">
+              <div class="file-field input-field">
+                <div class="btn">
+                  <span>File</span>
+                  <input type="file" />
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" />
+                </div>
+              </div>
+
+              <!-- Agregar las clases de disble cuando no este seleccionada la imagen y cuando este procesando (disabled) -->
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Adecuar imagen
+                <i class="material-icons right">file_upload</i>
+              </button>
+            </form>
+          </section>
+          <!-- Ocultar y mostar la barra de cargando cuando se este procesando la solicitud -->
+          <div class="progress" style="display: none">
+            <div class="indeterminate"></div>
+          </div>
+          <div class="divider"></div>
+          <section class="section">
+            <span>
+              <p><b>Orientación:</b> Horizontal</p>
+            </span>
+            <p><b>Alto:</b> 125px</p>
+            <p><b>Ancho:</b> 126px</p>
+          </section>
+        </div>
+
+        <div class="col s12 m12 l6">
+          <!-- materialboxed para la imagen -->
+          <section class="section">
+            <!-- Se agrega una parte para mostrar como va a quedar la imagen en la
+            hoja -->
+          </section>
+        </div>
+      </div>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </main>
   </body>
 </html>
