@@ -2,7 +2,7 @@
 Aplicación para imprimir imágenes en tamaño A4
 
 ## Características de la imagen
-* Puede tener cual quier tamaño o dimensión
+* Puede tener cualquier tamaño o dimensión
 * Debe de ser formato .jpg
 
 ## Características de la impresión
