@@ -28,7 +28,7 @@
       <div class="row card-panel">
         <div class="col s12">
           <section class="section">
-            <h3 class="center-align">Imprimir imágenes tamaño en A4</h3>
+            <h3 class="center-align">Imprimir imágenes en tamaño A4</h3>
             <ul class="row">
               <li class="col s12 l6">
                 La imagen puede tener cualquier tamaño o dimensión
@@ -44,12 +44,16 @@
 
         <div class="col s12 m12 l6">
           <section class="section">
-            <span><strong>Por favor seleccione la imagen que desea imprimir</strong></span>
+            <span
+              ><strong
+                >Por favor seleccione la imagen que desea imprimir</strong
+              ></span
+            >
             <form action="#">
               <div class="file-field input-field">
                 <div class="btn">
                   <span>File</span>
-                  <input type="file" />
+                  <input id="input-imagen" type="file" accept=".jpg" />
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text" />
@@ -58,7 +62,7 @@
 
               <!-- Agregar las clases de disble cuando no este seleccionada la imagen y cuando este procesando (disabled) -->
               <button
-                class="btn waves-effect waves-light"
+                class="btn waves-effect waves-light invisible"
                 type="submit"
                 name="action"
               >
@@ -68,20 +72,27 @@
             </form>
           </section>
           <!-- Ocultar y mostar la barra de cargando cuando se este procesando la solicitud -->
-          <div class="progress" style="display: none">
+          <div id="barra-de-carga" class="progress invisible">
             <div class="indeterminate"></div>
           </div>
           <div class="divider"></div>
-          <section class="section">
-            <span>
-              <p><strong>Orientación:</strong> Horizontal</p>
+          <section class="section row">
+            <span class="col s6">
+              <strong>Orientación:</strong>
             </span>
-            <p><strong>Alto:</strong> 125px</p>
-            <p><strong>Ancho:</strong> 126px</p>
+            <span class="col s6"><p id="orientacion-text">&nbsp</p></span>
+            <span class="col s6">
+              <strong>Ancho:</strong>
+            </span>
+            <span class="col s6"><p id="ancho-text">&nbsp</p></span>
+            <span class="col s6">
+              <strong>Alto:</strong>
+            </span>
+            <span class="col s6"><p id="alto-text">&nbsp</p></span>
           </section>
         </div>
 
-        <div class="col s12 m12 l6">
+        <div class="col s12 m12 l6 invisible">
           <!-- materialboxed para la imagen -->
           <section class="section">
             <!-- Se agrega una parte para mostrar como va a quedar la imagen en la
@@ -91,6 +102,7 @@
       </div>
       <!-- Compiled and minified JavaScript -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="./script/calcularMedidas.js"></script>
     </main>
   </body>
 </html>
