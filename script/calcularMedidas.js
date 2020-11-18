@@ -3,20 +3,26 @@ const VERTICAL = "Vertical";
 const ALTO_HOJA_VERTICAL = 1123;
 const ANCHO_HOJA_VERTICAL = 796;
 
-document
-  .getElementById("input-imagen")
-  .addEventListener("change", calcularMedidas, false);
+/* CAPTURA QUE SE SUBA UNA IMAGEN */
+document.addEventListener(
+  "DOMContentLoaded",
+  document
+    .getElementById("input-imagen")
+    .addEventListener("change", calcularMedidas, false),
+  false
+);
 
 /*FUNCION PARA CALCULAR LOS DATOS DE LA IMPRESIÓN EN A4*/
 async function calcularMedidas() {
   mostrarBarraDeCarga();
 
+  //Se obtiene el archivo
   let archivo = this.files[0];
-  let aspectRatioHoja = 1;
-  let anchoHoja = ANCHO_HOJA_VERTICAL;
-  let altoHoja = ALTO_HOJA_VERTICAL;
-  let anchoImagen = 0;
-  let altoImagen = 0;
+
+  //Se definen variables
+  const objHoja = new Imagen(ANCHO_HOJA_VERTICAL, ALTO_HOJA_VERTICAL, 1);
+  const objImagen = new Imagen(0, 0, 1);
+  const objResultado = new Resultado(0, 0, "");
 
   //Se convierte el archivo en una imagen
   let imagen = await convertirArchivoEnImagen(archivo);
@@ -25,59 +31,40 @@ async function calcularMedidas() {
   );
 
   //Se obtiene la realción de aspecto de la imagen
-  let aspectRatioImagen = calcularRelacionDeAspecto(
-    imagen.width,
-    imagen.height
-  );
-  console.log(`Relación de aspecto de la imagen ${aspectRatioImagen}`);
-
-  //Se clacula la realción de aspecto de la hoja segun la orientación
-  //En una imagen horizontal (aspectRatio > 1) la hoja es horizontal ALTO_HOJA_VERTICAL/ANCHO_HOJA_VERTICAL
-  if (aspectRatioImagen > 1) {
-    //si es horizontal
-    aspectRatioHoja = calcularRelacionDeAspecto(
-      ALTO_HOJA_VERTICAL,
-      ANCHO_HOJA_VERTICAL
-    );
-    console.log(`Relación de aspecto de la hoja ${aspectRatioHoja}`);
-    altoHoja = ANCHO_HOJA_VERTICAL;
-    anchoHoja = ALTO_HOJA_VERTICAL;
-  } else {
-    //si es vertical
-    aspectRatioHoja = calcularRelacionDeAspecto(
-      ANCHO_HOJA_VERTICAL,
-      ALTO_HOJA_VERTICAL
-    );
-    console.log(`Relación de aspecto de la hoja ${aspectRatioHoja}`);
-  }
+  objImagen.ancho = imagen.width;
+  objImagen.alto = imagen.height;
+  objImagen.calcularRelacionDeAspecto();
   console.log(
-    `Las medidas de la hoja son (ancho x alto) : ${anchoHoja}px x ${altoHoja}px`
+    `Relación de aspecto de la imagen ${objImagen.relacionDeAspecto}`
   );
 
-  //Se calcula la orientación de la hoja e imagen
-  let orientacion = calcularOrientacion(aspectRatioImagen);
-  console.log(orientacion);
+  //Con la relación de aspecto se organiza la orientación de la hoja (aspectRatio > 1) = Horizontal
+  if (objImagen.relacionDeAspecto > 1) {
+    let ancho = objHoja.ancho;
+    objHoja.ancho = objHoja.alto;
+    objHoja.alto = ancho;
+  }
+  objHoja.calcularRelacionDeAspecto();
+  console.log(
+    `Las medidas de la hoja son (ancho x alto) : ${objHoja.ancho}px x ${objHoja.alto}px`
+  );
+  console.log(`Relación de aspecto de la hoja ${objHoja.relacionDeAspecto}`);
 
   //Se ajusta la imagen si no alcanza a ingresar en la hoja
-  if (seNecesitaAjustar(imagen.width, imagen.height, anchoHoja, altoHoja)) {
-    console.log(`Se necesita ajustar la imagen`);
-    let medidas = AjustarImagen(
-      aspectRatioImagen,
-      imagen.width,
-      imagen.height,
-      aspectRatioHoja,
-      anchoHoja,
-      altoHoja
-    );
-    anchoImagen = medidas[0];
-    altoImagen = medidas[1];
-  } else {
-    console.log(`No necesita ajustar la imagen`);
-    anchoImagen = imagen.width;
-    altoImagen = imagen.height;
-  }
+  objResultado.calcularResultado(
+    objImagen.relacionDeAspecto,
+    objImagen.ancho,
+    objImagen.alto,
+    objHoja.relacionDeAspecto,
+    objHoja.ancho,
+    objHoja.alto
+  );
 
-  mostrarResultados(orientacion, anchoImagen, altoImagen);
+  mostrarResultados(
+    objResultado.orientacion,
+    objResultado.ancho,
+    objResultado.alto
+  );
 
   ocultarBarraDeCarga();
 }
@@ -90,63 +77,6 @@ async function convertirArchivoEnImagen(archivo) {
     console.log(err);
   }
 }
-
-/* FUNCION PARA CALCULAR LA RELACIÓN DE ASPECTO */
-function calcularRelacionDeAspecto(ancho, alto) {
-  return ancho / alto;
-}
-
-/* FUNCION PARA CALCULAR LA ORIENTACIÓN DE LA IMAGEN (HORIZONTAL O VERTICAL) */
-function calcularOrientacion(alto, ancho) {
-  //si son iguales se deja en vertical la orientación
-  if (alto >= ancho) {
-    return VERTICAL;
-  } else {
-    return HORIZONTAL;
-  }
-}
-
-/* FUNCION PARA CALCULAR LA ORIENTACIÓN DE LA IMAGEN (HORIZONTAL O VERTICAL) */
-function calcularOrientacion(aspectRatio) {
-  //si son iguales se deja en vertical la orientación
-  if (aspectRatio > 1) {
-    return HORIZONTAL;
-  } else {
-    return VERTICAL;
-  }
-}
-
-/* FUNCION PARA IDENTIFICAR SI SE DEBE DE AJUSTAR LA IMAGEN */
-function seNecesitaAjustar(anchoImagen, altoImagen, anchoHoja, altoHoja) {
-  if (anchoImagen > anchoHoja || altoImagen > altoHoja) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function AjustarImagen(
-  aspectRatioImagen,
-  anchoImagen,
-  altoImagen,
-  aspectRatioHoja,
-  anchoHoja,
-  altoHoja
-) {
-  let medidas = [anchoImagen, altoImagen];
-  if (aspectRatioHoja > aspectRatioImagen) {
-    medidas[0] = Math.round((anchoImagen * altoHoja) / altoImagen);
-    medidas[1] = altoHoja;
-  } else {
-    medidas[0] = anchoHoja;
-    medidas[1] = Math.round((altoImagen * anchoHoja) / anchoImagen);
-  }
-
-  console.log(`****************${medidas[0]} **************** ${medidas[1]}`);
-
-  return medidas;
-}
-
 /*FUNCIONES VISUALES*/
 function mostrarBarraDeCarga() {
   document.getElementById("barra-de-carga").classList.remove("invisible");
@@ -163,4 +93,90 @@ function mostrarResultados(orientacion, anchoImagen, altoImagen) {
   document.getElementById("orientacion-text").textContent = orientacion;
   document.getElementById("ancho-text").textContent = anchoImagen + " px";
   document.getElementById("alto-text").textContent = altoImagen + " px";
+}
+
+/* CLASE IMAGEN */
+class Imagen {
+  constructor(ancho, alto, relacionDeAspecto) {
+    this.ancho = ancho;
+    this.alto = alto;
+    this.relacionDeAspecto = relacionDeAspecto;
+  }
+
+  calcularRelacionDeAspecto() {
+    /* FUNCION PARA CALCULAR LA RELACIÓN DE ASPECTO */
+    this.relacionDeAspecto = this.ancho / this.alto;
+  }
+}
+
+/* CLASE RESULTADO */
+class Resultado {
+  constructor(ancho, alto, orientacion) {
+    this.ancho = ancho;
+    this.alto = alto;
+    this.orientacion = orientacion;
+  }
+
+  /* FUNCION PARA CALCULAR LA ORIENTACIÓN DE LA IMAGEN (HORIZONTAL O VERTICAL) */
+  calcularOrientacion(aspectRatio) {
+    //si son iguales se deja en vertical la orientación
+    if (aspectRatio > 1) {
+      this.orientacion = HORIZONTAL;
+    } else {
+      this.orientacion = VERTICAL;
+    }
+  }
+
+  /* FUNCION PARA IDENTIFICAR SI SE DEBE DE AJUSTAR LA IMAGEN */
+  seNecesitaAjustar(anchoImagen, altoImagen, anchoHoja, altoHoja) {
+    if (anchoImagen > anchoHoja || altoImagen > altoHoja) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /* FUNCION PARA AJUSTAR LA IMAGEN */
+  ajustarImagen(
+    relacionDeAspectoImagen,
+    anchoImagen,
+    altoImagen,
+    relacionDeAspectoHoja,
+    anchoHoja,
+    altoHoja
+  ) {
+    if (relacionDeAspectoHoja > relacionDeAspectoImagen) {
+      this.ancho = Math.round((anchoImagen * altoHoja) / altoImagen);
+      this.alto = altoHoja;
+    } else {
+      this.ancho = anchoHoja;
+      this.alto = Math.round((altoImagen * anchoHoja) / anchoImagen);
+    }
+  }
+
+  /* FUNCION PARA CALCULAR EL RESULTADO */
+  calcularResultado(
+    relacionDeAspectoImagen,
+    anchoImagen,
+    altoImagen,
+    relacionDeAspectoHoja,
+    anchoHoja,
+    altoHoja
+  ) {
+    this.calcularOrientacion(relacionDeAspectoImagen);
+    if (this.seNecesitaAjustar(anchoImagen, altoImagen, anchoHoja, altoHoja)) {
+      this.ajustarImagen(
+        relacionDeAspectoImagen,
+        anchoImagen,
+        altoImagen,
+        relacionDeAspectoHoja,
+        anchoHoja,
+        altoHoja
+      );
+    } else {
+      //No necesita ajustar la imagen
+      this.ancho = anchoImagen;
+      this.alto = altoImagen;
+    }
+  }
 }
