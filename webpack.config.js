@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/calcularMedidas.js",
@@ -28,4 +29,14 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "./src/Styles/estilos.css",
+          to: "../css/estilos.css",
+        },
+      ],
+    }),
+  ],
 };
