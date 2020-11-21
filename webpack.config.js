@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/calcularMedidas.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "public/js"),
     filename: "calcularMedidas-dist.js",
   },
   resolve: {
