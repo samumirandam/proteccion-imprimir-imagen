@@ -3,6 +3,8 @@ const VERTICAL = "Vertical";
 const ALTO_HOJA_VERTICAL = 1123;
 const ANCHO_HOJA_VERTICAL = 796;
 
+import Imagen from "./imagen.js";
+
 /* CAPTURA QUE SE SUBA UNA IMAGEN */
 document.addEventListener(
   "DOMContentLoaded",
@@ -93,20 +95,6 @@ function mostrarResultados(orientacion, anchoImagen, altoImagen) {
   document.getElementById("orientacion-text").textContent = orientacion;
   document.getElementById("ancho-text").textContent = anchoImagen + " px";
   document.getElementById("alto-text").textContent = altoImagen + " px";
-}
-
-/* CLASE IMAGEN */
-class Imagen {
-  constructor(ancho, alto, relacionDeAspecto) {
-    this.ancho = ancho;
-    this.alto = alto;
-    this.relacionDeAspecto = relacionDeAspecto;
-  }
-
-  calcularRelacionDeAspecto() {
-    /* FUNCION PARA CALCULAR LA RELACIÓN DE ASPECTO */
-    this.relacionDeAspecto = this.ancho / this.alto;
-  }
 }
 
 /* CLASE RESULTADO */
