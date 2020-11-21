@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime'
+
 /*  CONSTANSTES */
 import { ALTO_HOJA_VERTICAL, ANCHO_HOJA_VERTICAL } from "./Utils/constantes.js";
 
