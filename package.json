@@ -1,0 +1,33 @@
+{
+  "name": "proteccion-imprimir-imagen",
+  "version": "1.0.0",
+  "description": "Proyecto para ajustar una imagen a una hoja A4",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel ./script/calcularMedidas.js -o ./script/calcularMedidas-compiled.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samumirandam/proteccion-imprimir-imagen.git"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "materialize",
+    "javascript",
+    "jest"
+  ],
+  "author": "samumirandam <samuelchampi@gamil.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samumirandam/proteccion-imprimir-imagen/issues"
+  },
+  "homepage": "https://github.com/samumirandam/proteccion-imprimir-imagen#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3"
+  }
+}
