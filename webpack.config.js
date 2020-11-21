@@ -1,10 +1,10 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/calcularMedidas.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "calcularMedidas-dist.js",
   },
   resolve: {
     extensions: [".js"],
@@ -27,5 +27,5 @@ module.exports = {
         ],
       },
     ],
-  }
+  },
 };

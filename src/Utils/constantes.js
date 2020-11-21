@@ -1,0 +1,11 @@
+const HORIZONTAL = "Horizontal";
+const VERTICAL = "Vertical";
+const ALTO_HOJA_VERTICAL = 1123;
+const ANCHO_HOJA_VERTICAL = 796;
+
+export {
+  HORIZONTAL,
+  VERTICAL,
+  ALTO_HOJA_VERTICAL,
+  ANCHO_HOJA_VERTICAL,
+};
