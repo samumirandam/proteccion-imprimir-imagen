@@ -86,7 +86,7 @@ describe("Pruebas a la clase Resultado - Método seNecesitaAjustar", () => {
 });
 
 describe("Pruebas a la clase Resultado - Método ajustarImagen", () => {
-  test("Ajuste de la imagen cuando relación de aspecto de la imagen es mayor que la relación de aspecto de la hoja", () => {
+  test("Ajuste de la imagen cuando relación de aspecto de la imagen es mayor que la relación de aspecto de la hoja (ancho)", () => {
     let relacionDeAspectoImagen = 0.75;
     let anchoImagen = 960;
     let altoImagen = 1280;
@@ -103,7 +103,7 @@ describe("Pruebas a la clase Resultado - Método ajustarImagen", () => {
     );
     expect(objResultado.ancho).toBe(796);
   });
-  test("Ajuste de la imagen cuando relación de aspecto de la imagen es mayor que la relación de aspecto de la hoja", () => {
+  test("Ajuste de la imagen cuando relación de aspecto de la imagen es mayor que la relación de aspecto de la hoja (alto)", () => {
     let relacionDeAspectoImagen = 0.75;
     let anchoImagen = 960;
     let altoImagen = 1280;
@@ -120,7 +120,7 @@ describe("Pruebas a la clase Resultado - Método ajustarImagen", () => {
     );
     expect(objResultado.alto).toBe(1061);
   });
-  test("Ajuste de la imagen cuando relación de aspecto de la imagen es menor que la relación de aspecto de la hoja", () => {
+  test("Ajuste de la imagen cuando relación de aspecto de la imagen es menor que la relación de aspecto de la hoja (ancho)", () => {
     let relacionDeAspectoImagen = 1.11;
     let anchoImagen = 2128;
     let altoImagen = 1916;
@@ -137,7 +137,7 @@ describe("Pruebas a la clase Resultado - Método ajustarImagen", () => {
     );
     expect(objResultado.ancho).toBe(884);
   });
-  test("Ajuste de la imagen cuando relación de aspecto de la imagen es menor que la relación de aspecto de la hoja", () => {
+  test("Ajuste de la imagen cuando relación de aspecto de la imagen es menor que la relación de aspecto de la hoja (alto)", () => {
     let relacionDeAspectoImagen = 1.11;
     let anchoImagen = 2128;
     let altoImagen = 1916;
@@ -156,19 +156,112 @@ describe("Pruebas a la clase Resultado - Método ajustarImagen", () => {
   });
 });
 
-// ajustarImagen(
-//     relacionDeAspectoImagen,
-//     anchoImagen,
-//     altoImagen,
-//     relacionDeAspectoHoja,
-//     anchoHoja,
-//     altoHoja
-//   ) {
-//     if (relacionDeAspectoHoja > relacionDeAspectoImagen) {
-//       this.ancho = Math.round((anchoImagen * altoHoja) / altoImagen);
-//       this.alto = altoHoja;
-//     } else {
-//       this.ancho = anchoHoja;
-//       this.alto = Math.round((altoImagen * anchoHoja) / anchoImagen);
-//     }
-//   }
+describe("Pruebas a la clase Resultado - Método calcularResultado", () => {
+  test("Calculo del resultado de ajustar la imagen cuando se necesita ajustar (ancho)", () => {
+    let relacionDeAspectoImagen = 1.11;
+    let anchoImagen = 2128;
+    let altoImagen = 1916;
+    let relacionDeAspectoHoja = 1.41;
+    let anchoHoja = 1123;
+    let altoHoja = 796;
+    objResultado.calcularResultado(
+      relacionDeAspectoImagen,
+      anchoImagen,
+      altoImagen,
+      relacionDeAspectoHoja,
+      anchoHoja,
+      altoHoja
+    );
+    expect(objResultado.ancho).toBe(884);
+  });
+
+  test("Calculo del resultado de ajustar la imagen cuando se necesita ajustar (alto)", () => {
+    let relacionDeAspectoImagen = 1.11;
+    let anchoImagen = 2128;
+    let altoImagen = 1916;
+    let relacionDeAspectoHoja = 1.41;
+    let anchoHoja = 1123;
+    let altoHoja = 796;
+    objResultado.calcularResultado(
+      relacionDeAspectoImagen,
+      anchoImagen,
+      altoImagen,
+      relacionDeAspectoHoja,
+      anchoHoja,
+      altoHoja
+    );
+    expect(objResultado.alto).toBe(796);
+  });
+
+  test("Calculo del resultado de ajustar la imagen cuando se necesita ajustar (orientacion)", () => {
+    let relacionDeAspectoImagen = 1.11;
+    let anchoImagen = 2128;
+    let altoImagen = 1916;
+    let relacionDeAspectoHoja = 1.41;
+    let anchoHoja = 1123;
+    let altoHoja = 796;
+    objResultado.calcularResultado(
+      relacionDeAspectoImagen,
+      anchoImagen,
+      altoImagen,
+      relacionDeAspectoHoja,
+      anchoHoja,
+      altoHoja
+    );
+    expect(objResultado.orientacion).toMatch(HORIZONTAL);
+  });
+
+  test("Calculo del resultado de ajustar la imagen cuando no se necesita ajustar (ancho)", () => {
+    let relacionDeAspectoImagen = 0.66;
+    let anchoImagen = 563;
+    let altoImagen = 848;
+    let relacionDeAspectoHoja = 0.71;
+    let anchoHoja = 796;
+    let altoHoja = 1123;
+    objResultado.calcularResultado(
+      relacionDeAspectoImagen,
+      anchoImagen,
+      altoImagen,
+      relacionDeAspectoHoja,
+      anchoHoja,
+      altoHoja
+    );
+    expect(objResultado.ancho).toBe(563);
+  });
+
+  test("Calculo del resultado de ajustar la imagen cuando no se necesita ajustar (alto)", () => {
+    let relacionDeAspectoImagen = 0.66;
+    let anchoImagen = 563;
+    let altoImagen = 848;
+    let relacionDeAspectoHoja = 0.71;
+    let anchoHoja = 796;
+    let altoHoja = 1123;
+    objResultado.calcularResultado(
+      relacionDeAspectoImagen,
+      anchoImagen,
+      altoImagen,
+      relacionDeAspectoHoja,
+      anchoHoja,
+      altoHoja
+    );
+    expect(objResultado.alto).toBe(848);
+  });
+
+  test("Calculo del resultado de ajustar la imagen cuando no se necesita ajustar (orientación)", () => {
+    let relacionDeAspectoImagen = 0.66;
+    let anchoImagen = 563;
+    let altoImagen = 848;
+    let relacionDeAspectoHoja = 0.71;
+    let anchoHoja = 796;
+    let altoHoja = 1123;
+    objResultado.calcularResultado(
+      relacionDeAspectoImagen,
+      anchoImagen,
+      altoImagen,
+      relacionDeAspectoHoja,
+      anchoHoja,
+      altoHoja
+    );
+    expect(objResultado.orientacion).toMatch(VERTICAL);
+  });
+});

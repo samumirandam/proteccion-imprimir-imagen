@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\Documentos\Protección\Repositorios\proteccion-imprimir-imagen\__test__\resultado.test.js">
+    <testCase name="Pruebas a la clase Resultado - Método calcularOrientacion Calculo de orientación con relación de aspecto &gt; 1" duration="2"/>
+    <testCase name="Pruebas a la clase Resultado - Método calcularOrientacion Calculo de orientación con relación de aspecto &lt; 1" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método seNecesitaAjustar Cuando el AnchoImagen es mayor que AnchoHoja" duration="1"/>
+    <testCase name="Pruebas a la clase Resultado - Método seNecesitaAjustar Cuando el AltoImagen es mayor que AltoHoja" duration="4"/>
+    <testCase name="Pruebas a la clase Resultado - Método seNecesitaAjustar Cuando el AnchoImagen es menor que AnchoHoja" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método seNecesitaAjustar Cuando el AltoImagen es menor que AltoHoja" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método seNecesitaAjustar Cuando el AnchoImagen es igual que AnchoHoja y AltoImagen es igual que AltoHoja" duration="1"/>
+    <testCase name="Pruebas a la clase Resultado - Método ajustarImagen Ajuste de la imagen cuando relación de aspecto de la imagen es mayor que la relación de aspecto de la hoja (ancho)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método ajustarImagen Ajuste de la imagen cuando relación de aspecto de la imagen es mayor que la relación de aspecto de la hoja (alto)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método ajustarImagen Ajuste de la imagen cuando relación de aspecto de la imagen es menor que la relación de aspecto de la hoja (ancho)" duration="1"/>
+    <testCase name="Pruebas a la clase Resultado - Método ajustarImagen Ajuste de la imagen cuando relación de aspecto de la imagen es menor que la relación de aspecto de la hoja (alto)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método calcularResultado Calculo del resultado de ajustar la imagen cuando se necesita ajustar (ancho)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método calcularResultado Calculo del resultado de ajustar la imagen cuando se necesita ajustar (alto)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método calcularResultado Calculo del resultado de ajustar la imagen cuando se necesita ajustar (orientacion)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método calcularResultado Calculo del resultado de ajustar la imagen cuando no se necesita ajustar (ancho)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método calcularResultado Calculo del resultado de ajustar la imagen cuando no se necesita ajustar (alto)" duration="0"/>
+    <testCase name="Pruebas a la clase Resultado - Método calcularResultado Calculo del resultado de ajustar la imagen cuando no se necesita ajustar (orientación)" duration="0"/>
+  </file>
+  <file path="D:\Documentos\Protección\Repositorios\proteccion-imprimir-imagen\__test__\imagen.test.js">
+    <testCase name="Pruebas a la clase Imagen - Método calcularRelacionDeAspecto Calculo de la relación de aspecto ancho &gt; alto" duration="1"/>
+    <testCase name="Pruebas a la clase Imagen - Método calcularRelacionDeAspecto Calculo de la relación de aspecto ancho &lt; alto" duration="0"/>
+    <testCase name="Pruebas a la clase Imagen - Método calcularRelacionDeAspecto Calculo de la relación de aspecto ancho = alto" duration="0"/>
+  </file>
+</testExecutions>

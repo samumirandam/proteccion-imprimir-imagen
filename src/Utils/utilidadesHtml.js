@@ -16,4 +16,14 @@ const mostrarResultados = (orientacion, anchoImagen, altoImagen) => {
   document.getElementById("alto-text").textContent = altoImagen + " px";
 }
 
-export { mostrarBarraDeCarga, ocultarBarraDeCarga, mostrarResultados };
+const mostrarImagenSubida = (archivo) => {
+  var reader = new FileReader();
+  reader.onload = function () {
+    var dataURL = reader.result;
+    var output = document.getElementById("img-subida");
+    output.src = dataURL;
+  };
+  reader.readAsDataURL(archivo);
+}
+
+export { mostrarBarraDeCarga, ocultarBarraDeCarga, mostrarResultados, mostrarImagenSubida};

@@ -59,16 +59,6 @@
                   <input class="file-path validate" type="text" />
                 </div>
               </div>
-
-              <!-- Agregar las clases de disble cuando no este seleccionada la imagen y cuando este procesando (disabled) -->
-              <button
-                class="btn waves-effect waves-light invisible"
-                type="submit"
-                name="action"
-              >
-                Adecuar imagen
-                <i class="material-icons right">file_upload</i>
-              </button>
             </form>
           </section>
           <!-- Ocultar y mostar la barra de cargando cuando se este procesando la solicitud -->
@@ -92,11 +82,9 @@
           </section>
         </div>
 
-        <div class="col s12 m12 l6 invisible">
-          <!-- materialboxed para la imagen -->
+        <div class="col s12 m12 l6">
           <section class="section">
-            <!-- Se agrega una parte para mostrar como va a quedar la imagen en la
-            hoja -->
+            <img id="img-subida" class="responsive-img" src="" alt="Imagen subida">
           </section>
         </div>
       </div>
