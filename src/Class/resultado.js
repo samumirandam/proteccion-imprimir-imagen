@@ -21,11 +21,7 @@ class Resultado {
 
   /* FUNCION PARA IDENTIFICAR SI SE DEBE DE AJUSTAR LA IMAGEN */
   seNecesitaAjustar(anchoImagen, altoImagen, anchoHoja, altoHoja) {
-    if (anchoImagen > anchoHoja || altoImagen > altoHoja) {
-      return true;
-    } else {
-      return false;
-    }
+    return anchoImagen > anchoHoja || altoImagen > altoHoja;
   }
 
   /* FUNCION PARA AJUSTAR LA IMAGEN */

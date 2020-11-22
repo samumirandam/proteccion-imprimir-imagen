@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime'
+import "regenerator-runtime/runtime";
 
 /*  CONSTANSTES */
 import { ALTO_HOJA_VERTICAL, ANCHO_HOJA_VERTICAL } from "./Utils/constantes.js";
@@ -12,6 +12,7 @@ import {
   mostrarBarraDeCarga,
   ocultarBarraDeCarga,
   mostrarResultados,
+  mostrarImagenSubida,
 } from "./Utils/utilidadesHtml.js";
 import { convertirArchivoEnImagen } from "./Utils/utilidadesJS.js";
 
@@ -35,6 +36,9 @@ async function calcularMedidas() {
   const objHoja = new Imagen(ANCHO_HOJA_VERTICAL, ALTO_HOJA_VERTICAL, 1);
   const objImagen = new Imagen(0, 0, 1);
   const objResultado = new Resultado(0, 0, "");
+
+  //mostrar imagen
+  mostrarImagenSubida(archivo);
 
   //Se convierte el archivo en una imagen
   let imagen = await convertirArchivoEnImagen(archivo);
