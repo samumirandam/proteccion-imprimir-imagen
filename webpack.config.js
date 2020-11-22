@@ -36,6 +36,10 @@ module.exports = {
           from: "./src/Styles/estilos.css",
           to: "../css/estilos.css",
         },
+        {
+          from: "./src/Html/index.html",
+          to: "../index.html",
+        }
       ],
     }),
   ],

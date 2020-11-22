@@ -1,13 +1,13 @@
 /*FUNCIONES VISUALES*/
-function mostrarBarraDeCarga() {
+const mostrarBarraDeCarga = () => {
   document.getElementById("barra-de-carga").classList.remove("invisible");
 }
 
-function ocultarBarraDeCarga() {
+const ocultarBarraDeCarga = () => {
   document.getElementById("barra-de-carga").classList.add("invisible");
 }
 
-function mostrarResultados(orientacion, anchoImagen, altoImagen) {
+const mostrarResultados = (orientacion, anchoImagen, altoImagen) => {
   console.log(
     `El resultado es: Orientación: ${orientacion} y Ancho x Alto: ${anchoImagen}px x ${altoImagen}px`
   );
