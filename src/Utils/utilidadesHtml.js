@@ -1,11 +1,11 @@
 /*FUNCIONES VISUALES*/
 const mostrarBarraDeCarga = () => {
   document.getElementById("barra-de-carga").classList.remove("invisible");
-}
+};
 
 const ocultarBarraDeCarga = () => {
   document.getElementById("barra-de-carga").classList.add("invisible");
-}
+};
 
 const mostrarResultados = (orientacion, anchoImagen, altoImagen) => {
   console.log(
@@ -14,7 +14,7 @@ const mostrarResultados = (orientacion, anchoImagen, altoImagen) => {
   document.getElementById("orientacion-text").textContent = orientacion;
   document.getElementById("ancho-text").textContent = anchoImagen + " px";
   document.getElementById("alto-text").textContent = altoImagen + " px";
-}
+};
 
 const mostrarImagenSubida = (archivo) => {
   var reader = new FileReader();
@@ -24,6 +24,12 @@ const mostrarImagenSubida = (archivo) => {
     output.src = dataURL;
   };
   reader.readAsDataURL(archivo);
-}
+  document.getElementById("img-subida").classList.remove("invisible");
+};
 
-export { mostrarBarraDeCarga, ocultarBarraDeCarga, mostrarResultados, mostrarImagenSubida};
+export {
+  mostrarBarraDeCarga,
+  ocultarBarraDeCarga,
+  mostrarResultados,
+  mostrarImagenSubida,
+};
