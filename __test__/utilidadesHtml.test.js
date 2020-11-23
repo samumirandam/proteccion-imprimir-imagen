@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime";
 import {
   mostrarBarraDeCarga,
   ocultarBarraDeCarga,
@@ -5,7 +6,6 @@ import {
   mostrarImagenSubida,
 } from "../src/Utils/utilidadesHtml.js";
 import { HORIZONTAL, VERTICAL } from "../src/Utils/constantes";
-
 
 describe("Pruebas a las Utilidades de HTML - Método mostrarBarraDeCarga", () => {
   test("Se prueba que un elemento html no tenga la clase invisible", () => {
@@ -32,9 +32,11 @@ describe("Pruebas a las Utilidades de HTML - Método mostrarResultados", () => {
       '<p id="ancho-text">&nbsp</p>' +
       '<p id="alto-text">&nbsp</p>' +
       "</div>";
-      mostrarResultados(HORIZONTAL, 200, 100);
+    mostrarResultados(HORIZONTAL, 200, 100);
 
-    expect(document.getElementById("orientacion-text").textContent).toContain(HORIZONTAL);
+    expect(document.getElementById("orientacion-text").textContent).toContain(
+      HORIZONTAL
+    );
   });
 
   test("Se prueba que un elemento html tenga los resultados (ancho)", () => {
@@ -44,11 +46,11 @@ describe("Pruebas a las Utilidades de HTML - Método mostrarResultados", () => {
       '<p id="ancho-text">&nbsp</p>' +
       '<p id="alto-text">&nbsp</p>' +
       "</div>";
-      mostrarResultados(HORIZONTAL, 200, 100);
+    mostrarResultados(HORIZONTAL, 200, 100);
 
     expect(document.getElementById("ancho-text").textContent).toContain(200);
   });
-  
+
   test("Se prueba que un elemento html tenga los resultados (ancho)", () => {
     document.body.innerHTML =
       "<div>" +
@@ -56,8 +58,32 @@ describe("Pruebas a las Utilidades de HTML - Método mostrarResultados", () => {
       '<p id="ancho-text">&nbsp</p>' +
       '<p id="alto-text">&nbsp</p>' +
       "</div>";
-      mostrarResultados(HORIZONTAL, 200, 100);
+    mostrarResultados(HORIZONTAL, 200, 100);
 
     expect(document.getElementById("alto-text").textContent).toContain(100);
+  });
+});
+
+describe("Pruebas a las Utilidades de HTML - Método mostrarImagenSubida", () => {
+  test("Se prueba que un elemento html tenga la imagen y la muestre", async () => {
+    document.body.innerHTML =
+      "<div>" + '<img class="invisible" id="img-subida">' + "</div>";
+
+    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+    await Promise.resolve(() => {
+      let oReq = new XMLHttpRequest();
+      oReq.open("GET", "https://picsum.photos/200/300", true);
+      oReq.responseType = "blob";
+      oReq.onload = async function (oEvent) {
+        let blob = await Promise.resolve(oReq.response);
+        let imagen = mostrarImagenSubida(blob);
+        await delay(3000);
+        expect(document.getElementById("img-subida").classList).not.toContain(
+          "invisible"
+        );
+      };
+      oReq.send();
+    });
   });
 });
